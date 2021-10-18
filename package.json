@@ -1,0 +1,42 @@
+{
+  "name": "@treasure-chess/contracts",
+  "devDependencies": {
+    "@nomiclabs/hardhat-ethers": "^2.0.2",
+    "@openzeppelin/contracts-upgradeable": "^4.3.1",
+    "@openzeppelin/hardhat-upgrades": "^1.10.0",
+    "@typechain/ethers-v5": "^7.0.1",
+    "@typechain/hardhat": "^2.0.2",
+    "@types/chai": "^4.2.18",
+    "@types/mocha": "^8.2.2",
+    "@types/node": "^15.12.2",
+    "chai": "^4.3.4",
+    "chai-ethers": "^0.0.1",
+    "dotenv": "^10.0.0",
+    "ethereum-waffle": "^3.3.0",
+    "ethers": "^5.4.5",
+    "hardhat": "^2.6.1",
+    "hardhat-deploy": "^0.8.6",
+    "hardhat-deploy-ethers": "^0.3.0-beta.10",
+    "hardhat-prettier": "^0.0.1",
+    "prettier": "^2.3.1",
+    "prettier-plugin-solidity": "^1.0.0-beta.13",
+    "solhint": "^3.3.6",
+    "solidity-coverage": "^0.7.16",
+    "ts-generator": "^0.1.1",
+    "ts-node": "^10.0.0",
+    "typechain": "^5.0.0",
+    "typescript": "^4.3.2"
+  },
+  "scripts": {
+    "clean": "hardhat clean",
+    "format": "hardhat format",
+    "compile": "hardhat compile",
+    "test": "hardhat test",
+    "deploy": "hardhat run scripts/deploy.ts",
+	"upgrade-contracts": "hardhat run scripts/upgrade.ts"
+  },
+  "dependencies": {
+    "@opengsn/contracts": "^2.2.2",
+    "@openzeppelin/contracts": "^4.3.1"
+  }
+}
