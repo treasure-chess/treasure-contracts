@@ -5,3 +5,5 @@ coverage
 coverage.json
 .openzeppelin/
 cache/
+node_modules
+.env
