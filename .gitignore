@@ -7,3 +7,4 @@ coverage.json
 cache/
 node_modules
 .env
+yarn-error.log
