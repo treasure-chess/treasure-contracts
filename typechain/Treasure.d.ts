@@ -22,7 +22,6 @@ import { TypedEventFilter, TypedEvent, TypedListener } from "./commons";
 
 interface TreasureInterface extends ethers.utils.Interface {
   functions: {
-    "achievements(uint16)": FunctionFragment;
     "addAdmin(address)": FunctionFragment;
     "admins(address)": FunctionFragment;
     "approve(address,uint256)": FunctionFragment;
@@ -30,7 +29,6 @@ interface TreasureInterface extends ethers.utils.Interface {
     "games(uint256)": FunctionFragment;
     "getApproved(uint256)": FunctionFragment;
     "getOriginalPlayer(uint256)": FunctionFragment;
-    "getTextAcheivementsByTreasure(uint256)": FunctionFragment;
     "getTotalGames()": FunctionFragment;
     "initialize()": FunctionFragment;
     "isApprovedForAll(address,address)": FunctionFragment;
@@ -51,15 +49,10 @@ interface TreasureInterface extends ethers.utils.Interface {
     "tokenURI(uint256)": FunctionFragment;
     "transferFrom(address,address,uint256)": FunctionFragment;
     "transferOwnership(address)": FunctionFragment;
-    "updateAchievements(uint16,string)": FunctionFragment;
     "upgradeTo(address)": FunctionFragment;
     "upgradeToAndCall(address,bytes)": FunctionFragment;
   };
 
-  encodeFunctionData(
-    functionFragment: "achievements",
-    values: [BigNumberish]
-  ): string;
   encodeFunctionData(functionFragment: "addAdmin", values: [string]): string;
   encodeFunctionData(functionFragment: "admins", values: [string]): string;
   encodeFunctionData(
@@ -74,10 +67,6 @@ interface TreasureInterface extends ethers.utils.Interface {
   ): string;
   encodeFunctionData(
     functionFragment: "getOriginalPlayer",
-    values: [BigNumberish]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "getTextAcheivementsByTreasure",
     values: [BigNumberish]
   ): string;
   encodeFunctionData(
@@ -157,20 +146,12 @@ interface TreasureInterface extends ethers.utils.Interface {
     functionFragment: "transferOwnership",
     values: [string]
   ): string;
-  encodeFunctionData(
-    functionFragment: "updateAchievements",
-    values: [BigNumberish, string]
-  ): string;
   encodeFunctionData(functionFragment: "upgradeTo", values: [string]): string;
   encodeFunctionData(
     functionFragment: "upgradeToAndCall",
     values: [string, BytesLike]
   ): string;
 
-  decodeFunctionResult(
-    functionFragment: "achievements",
-    data: BytesLike
-  ): Result;
   decodeFunctionResult(functionFragment: "addAdmin", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "admins", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "approve", data: BytesLike): Result;
@@ -182,10 +163,6 @@ interface TreasureInterface extends ethers.utils.Interface {
   ): Result;
   decodeFunctionResult(
     functionFragment: "getOriginalPlayer",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "getTextAcheivementsByTreasure",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -247,10 +224,6 @@ interface TreasureInterface extends ethers.utils.Interface {
     functionFragment: "transferOwnership",
     data: BytesLike
   ): Result;
-  decodeFunctionResult(
-    functionFragment: "updateAchievements",
-    data: BytesLike
-  ): Result;
   decodeFunctionResult(functionFragment: "upgradeTo", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "upgradeToAndCall",
@@ -258,7 +231,6 @@ interface TreasureInterface extends ethers.utils.Interface {
   ): Result;
 
   events: {
-    "AchievementUpdated(uint16,string,string)": EventFragment;
     "AdminAdded(address,address)": EventFragment;
     "AdminChanged(address,address)": EventFragment;
     "AdminRemoved(address,address)": EventFragment;
@@ -274,7 +246,6 @@ interface TreasureInterface extends ethers.utils.Interface {
     "Upgraded(address)": EventFragment;
   };
 
-  getEvent(nameOrSignatureOrTopic: "AchievementUpdated"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "AdminAdded"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "AdminChanged"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "AdminRemoved"): EventFragment;
@@ -289,10 +260,6 @@ interface TreasureInterface extends ethers.utils.Interface {
   getEvent(nameOrSignatureOrTopic: "Transfer"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "Upgraded"): EventFragment;
 }
-
-export type AchievementUpdatedEvent = TypedEvent<
-  [number, string, string] & { index: number; newText: string; oldText: string }
->;
 
 export type AdminAddedEvent = TypedEvent<
   [string, string] & { addedBy: string; newAdmin: string }
@@ -403,11 +370,6 @@ export class Treasure extends BaseContract {
   interface: TreasureInterface;
 
   functions: {
-    achievements(
-      arg0: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<[string]>;
-
     addAdmin(
       _admin: string,
       overrides?: Overrides & { from?: string | Promise<string> }
@@ -446,11 +408,6 @@ export class Treasure extends BaseContract {
       _id: BigNumberish,
       overrides?: CallOverrides
     ): Promise<[string]>;
-
-    getTextAcheivementsByTreasure(
-      _id: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<[[string, string, string]]>;
 
     getTotalGames(overrides?: CallOverrides): Promise<[BigNumber]>;
 
@@ -562,12 +519,6 @@ export class Treasure extends BaseContract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
-    updateAchievements(
-      _achievementIndex: BigNumberish,
-      _newText: string,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<ContractTransaction>;
-
     upgradeTo(
       newImplementation: string,
       overrides?: Overrides & { from?: string | Promise<string> }
@@ -579,8 +530,6 @@ export class Treasure extends BaseContract {
       overrides?: PayableOverrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
   };
-
-  achievements(arg0: BigNumberish, overrides?: CallOverrides): Promise<string>;
 
   addAdmin(
     _admin: string,
@@ -620,11 +569,6 @@ export class Treasure extends BaseContract {
     _id: BigNumberish,
     overrides?: CallOverrides
   ): Promise<string>;
-
-  getTextAcheivementsByTreasure(
-    _id: BigNumberish,
-    overrides?: CallOverrides
-  ): Promise<[string, string, string]>;
 
   getTotalGames(overrides?: CallOverrides): Promise<BigNumber>;
 
@@ -727,12 +671,6 @@ export class Treasure extends BaseContract {
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
-  updateAchievements(
-    _achievementIndex: BigNumberish,
-    _newText: string,
-    overrides?: Overrides & { from?: string | Promise<string> }
-  ): Promise<ContractTransaction>;
-
   upgradeTo(
     newImplementation: string,
     overrides?: Overrides & { from?: string | Promise<string> }
@@ -745,11 +683,6 @@ export class Treasure extends BaseContract {
   ): Promise<ContractTransaction>;
 
   callStatic: {
-    achievements(
-      arg0: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<string>;
-
     addAdmin(_admin: string, overrides?: CallOverrides): Promise<void>;
 
     admins(arg0: string, overrides?: CallOverrides): Promise<boolean>;
@@ -785,11 +718,6 @@ export class Treasure extends BaseContract {
       _id: BigNumberish,
       overrides?: CallOverrides
     ): Promise<string>;
-
-    getTextAcheivementsByTreasure(
-      _id: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<[string, string, string]>;
 
     getTotalGames(overrides?: CallOverrides): Promise<BigNumber>;
 
@@ -888,12 +816,6 @@ export class Treasure extends BaseContract {
       overrides?: CallOverrides
     ): Promise<void>;
 
-    updateAchievements(
-      _achievementIndex: BigNumberish,
-      _newText: string,
-      overrides?: CallOverrides
-    ): Promise<void>;
-
     upgradeTo(
       newImplementation: string,
       overrides?: CallOverrides
@@ -907,24 +829,6 @@ export class Treasure extends BaseContract {
   };
 
   filters: {
-    "AchievementUpdated(uint16,string,string)"(
-      index?: null,
-      newText?: null,
-      oldText?: null
-    ): TypedEventFilter<
-      [number, string, string],
-      { index: number; newText: string; oldText: string }
-    >;
-
-    AchievementUpdated(
-      index?: null,
-      newText?: null,
-      oldText?: null
-    ): TypedEventFilter<
-      [number, string, string],
-      { index: number; newText: string; oldText: string }
-    >;
-
     "AdminAdded(address,address)"(
       addedBy?: null,
       newAdmin?: null
@@ -1131,11 +1035,6 @@ export class Treasure extends BaseContract {
   };
 
   estimateGas: {
-    achievements(
-      arg0: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
-
     addAdmin(
       _admin: string,
       overrides?: Overrides & { from?: string | Promise<string> }
@@ -1159,11 +1058,6 @@ export class Treasure extends BaseContract {
     ): Promise<BigNumber>;
 
     getOriginalPlayer(
-      _id: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
-
-    getTextAcheivementsByTreasure(
       _id: BigNumberish,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
@@ -1278,12 +1172,6 @@ export class Treasure extends BaseContract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
-    updateAchievements(
-      _achievementIndex: BigNumberish,
-      _newText: string,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<BigNumber>;
-
     upgradeTo(
       newImplementation: string,
       overrides?: Overrides & { from?: string | Promise<string> }
@@ -1297,11 +1185,6 @@ export class Treasure extends BaseContract {
   };
 
   populateTransaction: {
-    achievements(
-      arg0: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
-
     addAdmin(
       _admin: string,
       overrides?: Overrides & { from?: string | Promise<string> }
@@ -1334,11 +1217,6 @@ export class Treasure extends BaseContract {
     ): Promise<PopulatedTransaction>;
 
     getOriginalPlayer(
-      _id: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
-
-    getTextAcheivementsByTreasure(
       _id: BigNumberish,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
@@ -1450,12 +1328,6 @@ export class Treasure extends BaseContract {
 
     transferOwnership(
       newOwner: string,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<PopulatedTransaction>;
-
-    updateAchievements(
-      _achievementIndex: BigNumberish,
-      _newText: string,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 

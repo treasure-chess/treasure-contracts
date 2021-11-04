@@ -36,7 +36,7 @@ const config: HardhatUserConfig = {
   networks: {
     localhost: {
       url: 'http://127.0.0.1:8545',
-	  accounts: [process.env.ROPSTEN_PRIVATE_KEY || ""]
+	  accounts: [process.env.PRIVATE_KEY || ""]
     },
     hardhat: {
     //   forking: {
@@ -45,8 +45,16 @@ const config: HardhatUserConfig = {
     },
     ropsten: {
       url: `https://ropsten.infura.io/v3/${process.env.INFURA_API_KEY}`,
-      accounts: [`0x${process.env.ROPSTEN_PRIVATE_KEY}`],
+      accounts: [`0x${process.env.PRIVATE_KEY}`],
     },
+    mumbai: {
+      url: `https://polygon-mumbai.infura.io/v3/${process.env.INFURA_API_KEY}`,
+      accounts: [`0x${process.env.PRIVATE_KEY}`],
+    },
+    polygon: {
+      url: `https://polygon-mainnet.infura.io/v3/${process.env.INFURA_API_KEY}`,
+      accounts: [`0x${process.env.PRIVATE_KEY}`],
+    }
   },
 }
 

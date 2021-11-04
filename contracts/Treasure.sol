@@ -23,7 +23,6 @@ contract Treasure is
 
   //Access Storage
   mapping(address => bool) public admins;
-  mapping(uint16 => string) public achievements;
 
   //Treasure Storage
   struct Game {
@@ -35,7 +34,7 @@ contract Treasure is
     bool color; //0 white, 1 black
   }
 
-  /// NFT storage
+  /// NFT Storage
   mapping(uint256 => Game) public games;
   mapping(uint256 => address) public originalPlayers;
   mapping(bytes32 => uint256) public movesHashToId;
@@ -47,7 +46,6 @@ contract Treasure is
   event Received(address sender, uint256 amount);
   event RescuedEther(address recipient, uint256 amount);
   event RescuedERC20(address token, address recipient, uint256 amount);
-  event AchievementUpdated(uint16 index, string newText, string oldText);
 
   function initialize() public initializer {
     __ERC721_init('Treasure Chess', 'CHESS');
@@ -72,11 +70,6 @@ contract Treasure is
     uint16 _achievement3,
     bool _color
   ) public onlyAdmin returns (uint256) {
-    require(
-      movesHashToId[_moveHash] == 0,
-      'An NFT of this game already exists because a hash of its moves + white/black) already exists. Read Treasure Chess docs for more info.'
-    );
-
     _tokenIds.increment();
 
     uint256 newItemId = _tokenIds.current();
@@ -107,6 +100,7 @@ contract Treasure is
     return _tokenIds.current();
   }
 
+
   function addAdmin(address _admin) public onlyOwner {
     admins[_admin] = true;
     emit AdminAdded(msg.sender, _admin);
@@ -116,29 +110,6 @@ contract Treasure is
   function removeAdmin(address _admin) public onlyOwner {
     admins[_admin] = false;
     emit AdminRemoved(msg.sender, _admin);
-  }
-
-  //Only owner, possibly community can vote on these later.
-  function updateAchievements(uint16 _achievementIndex, string memory _newText)
-    public
-    onlyOwner
-  {
-    string memory temp = achievements[_achievementIndex];
-
-    achievements[_achievementIndex] = _newText;
-    emit AchievementUpdated(_achievementIndex, _newText, temp);
-  }
-
-  function getTextAcheivementsByTreasure(uint256 _id)
-    public
-    view
-    returns (string[3] memory)
-  {
-    return [
-      achievements[ games[_id].achievement1 ],
-      achievements[ games[_id].achievement2 ],
-      achievements[ games[_id].achievement3 ]
-    ];
   }
 
   /*
