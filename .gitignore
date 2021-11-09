@@ -1,3 +1,10 @@
+artifacts/
+.DS_STORE
+cache/
+typechain/*
+
+
+
 # Logs
 logs
 *.log

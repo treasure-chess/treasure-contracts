@@ -204,31 +204,31 @@ contract TreasureMarket is
     emit CancelSaleWithToken(_msgSender(), _id);
   }
 
+  //@dev - moving tokens to the contract is the same gas as moving them to the platform owner, so just do that.
   function tokenInstantBuy(uint _id, address _tokenAddress) public{
     //check SignatureChecker of sale. if its invalid, remove it.
     require(forSaleWithToken[_id] != address(0), 'Item not for sale.');
     require(seller[_id] != address(0), "Something is not quite right here. The seller cant be 0");
 
     IERC20Upgradeable paymentToken = IERC20Upgradeable(_tokenAddress);
+    require(paymentToken.balanceOf(_msgSender()) >= priceByIdToken[_id], "The buyer does not have a high enough token balance to afford this.");
+
 
     //Split profits
-    uint256 royalty = ((priceByIdTokens[_id] * royaltyPercentagePoint) / 1000);
+    uint256 royalty = (priceByIdTokens[_id] * royaltyPercentagePoint) / 1000; //send to original player
+    uint256 funds = (priceByIdTokens[_id] * (1000 - royaltyPercentagePoint - feePercentagePoint)) / 1000; //send to seller
+    uint platformFee = (priceByIdTokens[_id] * feePercentagePoint) / 1000;
 
-    /**
-    address originalPlayer = treasure.getOriginalPlayer(_id);
-    (bool sentRoyalty, ) = originalPlayer.call{ value: royalty }('');
-    require(sentRoyalty, 'Failed to send royalty. Transaction fails. : ');
+    token.safeTransferFrom(_msgSender(), treasure.getOriginalPlayer(_id), royalty);
+    token.safeTransferFrom(_msgSender(), seller[_id], funds);
+    token.safeTransferFrom(_msgSender(), owner(), platformFee);
 
-    uint256 funds = (priceByIdTokens[_id] *
-      (1000 - royaltyPercentagePoint - feePercentagePoint)) / 1000;
-    (bool sentFunds, ) = seller[_id].call{ value: funds }('');
-    require(sentFunds, 'Failed to send funds to seller. Transaction fails.');
-    //remaining funds (msg.value*feePercentagePoint/1000) are held in this contract until owner wants to withdraw.
-
-    isForSaleById[_id] = false;
+    //payment made. Move the NFT and emit
+    forSaleWithToken[_id] = address(0);
+    seller[_id] = address(0);
     treasure.safeTransferFrom(treasure.ownerOf(_id), _msgSender(), _id);
-    emit SaleComplete(seller[_id], _id, _msgSender());**/
 
+    SaleCompleteWithToken(seller[_id], _id, _msgSender(), _tokenAddress);
   }
 
   //======== Admin functions ========//

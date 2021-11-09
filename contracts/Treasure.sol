@@ -74,7 +74,7 @@ contract Treasure is
   ) public onlyAdmin returns (uint256) {
     require(
       movesHashToId[_moveHash] == 0,
-      'An NFT of this game already exists because a hash of its moves + white/black) already exists. Read Treasure Chess docs for more info.'
+      'This game has already been minted.'
     );
 
     _tokenIds.increment();
@@ -135,10 +135,35 @@ contract Treasure is
     returns (string[3] memory)
   {
     return [
-      achievements[ games[_id].achievement1 ],
-      achievements[ games[_id].achievement2 ],
-      achievements[ games[_id].achievement3 ]
+      achievements[games[_id].achievement1],
+      achievements[games[_id].achievement2],
+      achievements[games[_id].achievement3]
     ];
+  }
+
+  struct FullGame {
+    bytes32 movesHash;
+    uint8 level;
+    uint16 achievement1; //65,000 types should be more than enough forever.
+    uint16 achievement2; //If these are onchain, it can be something that future gov token...
+    uint16 achievement3; //...holders can vote on later.
+    bool color; //0 white, 1 black
+    string[3] achTexts; //array of the achiement texts
+  }
+
+  function getFullGameObject(uint256 _id) public view returns (FullGame) {
+    Game game = games[_id];
+    FullGame fullGame = FullGame(
+      game.movesHash,
+      game.level,
+      game.achievement1,
+      game.achievement2,
+      game.achievement3,
+      game.color,
+      getTextAcheivementsByTreasure(_id)
+    );
+
+    return fullGame;
   }
 
   /*
