@@ -1,0 +1,41 @@
+name: Publish Release Package
+
+on:
+  release:
+    types: [published]
+
+jobs:
+  publish-release:
+    name: Publish release package
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Use Node.js 14.x
+        uses: actions/setup-node@v1
+        with:
+          node-version: 14.x
+          registry-url: https://registry.npmjs.org/
+
+      - name: Parse Tag
+        run: |
+          if echo -n "${{ github.ref }}" | grep -qE "refs/tags/chess-achievements@";then
+            echo "PUBLISH=1" >> $GITHUB_ENV
+          fi
+
+      - name: Compile contracts
+        run: |
+          yarn install --frozen-lockfile
+          yarn compile
+        env:
+          PRIVATE_KEY: ${{ secrets.PRIVATE_KEY }}
+          INFURA_API_KEY: ${{ secrets.INFURA_API_KEY }}
+
+      - name: Publish package
+        if: env.PUBLISH == 1
+        run: tasks/npm-publish.sh . latest
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NPMJS_TOKEN: ${{ secrets.NPMJS_TOKEN }}

@@ -1,5 +1,20 @@
 {
   "name": "@treasure-chess/contracts",
+  "files": [
+    "artifacts/contracts/**/*"
+  ],
+  "scripts": {
+    "clean": "hardhat clean",
+    "format": "hardhat format",
+    "compile": "hardhat compile",
+    "test": "hardhat test",
+    "deploy": "hardhat run scripts/deploy.ts",
+    "upgrade-contracts": "hardhat run scripts/upgrade.ts"
+  },
+  "dependencies": {
+    "@opengsn/contracts": "^2.2.2",
+    "@openzeppelin/contracts": "^4.3.1"
+  },
   "devDependencies": {
     "@nomiclabs/hardhat-ethers": "^2.0.2",
     "@openzeppelin/contracts-upgradeable": "^4.3.1",
@@ -26,17 +41,5 @@
     "ts-node": "^10.0.0",
     "typechain": "^5.0.0",
     "typescript": "^4.3.2"
-  },
-  "scripts": {
-    "clean": "hardhat clean",
-    "format": "hardhat format",
-    "compile": "hardhat compile",
-    "test": "hardhat test",
-    "deploy": "hardhat run scripts/deploy.ts",
-	"upgrade-contracts": "hardhat run scripts/upgrade.ts"
-  },
-  "dependencies": {
-    "@opengsn/contracts": "^2.2.2",
-    "@openzeppelin/contracts": "^4.3.1"
   }
 }
