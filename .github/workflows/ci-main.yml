@@ -8,6 +8,7 @@ on:
       - 'flattened/*'
       - 'scripts/*'
       - 'package.json'
+      - 'hardhat.config.ts'
       - '.github/workflows/cd.master.*'
 
 jobs:
