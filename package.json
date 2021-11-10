@@ -1,5 +1,6 @@
 {
   "name": "@treasure-chess/contracts",
+  "version": "0.0.5",
   "files": [
     "artifacts/contracts/**/*"
   ],
