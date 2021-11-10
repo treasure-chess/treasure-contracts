@@ -37,5 +37,5 @@ jobs:
         if: env.PUBLISH == 1
         run: tasks/npm-publish.sh . latest
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PAT: ${{ secrets.PAT }}
           NPMJS_TOKEN: ${{ secrets.NPMJS_TOKEN }}

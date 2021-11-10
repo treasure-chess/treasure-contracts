@@ -49,5 +49,5 @@ jobs:
           tasks/npmrc-use-npmjs.sh > .npmrc
           tasks/npm-publish.sh . dev
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PAT: ${{ secrets.PAT }}
           NPMJS_TOKEN: ${{ secrets.NPMJS_TOKEN }}
