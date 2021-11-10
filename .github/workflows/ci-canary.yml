@@ -4,7 +4,9 @@ on:
   push:
     branches: ['dev']
     paths:
-      - 'src/*'
+      - 'contracts/*'
+      - 'flattened/*'
+      - 'scripts/*'
       - 'package.json'
       # - '**.md' commented-out because README updates should go to the packages
       - '.github/workflows/ci-canary.yml'
@@ -28,12 +30,19 @@ jobs:
           key: node_modules_${{ hashFiles('**/yarn.lock') }}
       - name: Install dependencies
         run: yarn install --frozen-lockfile
-      # No build step necessary, but this is where it would go
+        
+      - name: Compile contracts
+        run: yarn compile
+        env:
+          PRIVATE_KEY: ${{ secrets.PRIVATE_KEY }}
+          INFURA_API_KEY: ${{ secrets.INFURA_API_KEY }}
+          
       - name: Setup canary package versions locally
         run: |
           shortRev=$(git rev-parse --short ${{ github.sha }})
           preId=dev.${shortRev}
           yarn lerna version prerelease --yes --no-git-tag-version --preid ${preId}
+          
       - name: Publish
         run: |
           tasks/npmrc-use-npmjs.sh > .npmrc

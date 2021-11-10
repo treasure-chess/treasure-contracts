@@ -46,9 +46,11 @@ jobs:
         if: env.PUBLISH_PR_ARTIFACT == 1
         run: yarn install --frozen-lockfile
 
-      # - name: Build
-      #   if: env.PUBLISH_PR_ARTIFACT == 1
-      #   run: yarn build
+      - name: Compile contracts
+        run: yarn compile
+        env:
+          PRIVATE_KEY: ${{ secrets.PRIVATE_KEY }}
+          INFURA_API_KEY: ${{ secrets.INFURA_API_KEY }}
 
       - name: Setup PR package versions locally
         if: env.PUBLISH_PR_ARTIFACT == 1

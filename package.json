@@ -33,6 +33,7 @@
     "hardhat-deploy": "^0.8.6",
     "hardhat-deploy-ethers": "^0.3.0-beta.10",
     "hardhat-prettier": "^0.0.1",
+    "lerna": "^4.0.0",
     "prettier": "^2.3.1",
     "prettier-plugin-solidity": "^1.0.0-beta.13",
     "solhint": "^3.3.6",

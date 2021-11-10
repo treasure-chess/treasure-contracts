@@ -4,7 +4,9 @@ on:
   push:
     branches: ['main']
     paths:
-      - 'src/*'
+      - 'contracts/*'
+      - 'flattened/*'
+      - 'scripts/*'
       - 'package.json'
       - '.github/workflows/cd.master.*'
 
@@ -26,7 +28,7 @@ jobs:
       - name: Check package versions
         id: check_versions
         run: |
-          PUBLISHED_VERSION=`npm show @treasure-chess/chess-achievements version`
+          PUBLISHED_VERSION=`npm show @treasure-chess/treasure-contracts version`
           NEW_VERSION=`jq -r .version package.json`
           if [ "$PUBLISHED_VERSION" != "$NEW_VERSION" ];then
             echo "SHOULD_PUBLISH=1" >> $GITHUB_ENV
@@ -43,8 +45,8 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # This token is provided by Actions, you do not need to create your own token
         with:
-          tag_name: chess-achievements@v${{ steps.check_versions.outputs.NEW_VERSION }}
-          release_name: chess-achievements@v${{ steps.check_versions.outputs.NEW_VERSION }}
+          tag_name: treasure-contracts@v${{ steps.check_versions.outputs.NEW_VERSION }}
+          release_name: treasure-contracts@v${{ steps.check_versions.outputs.NEW_VERSION }}
           body: |
             Changes in this Release
             ## Changed

@@ -21,7 +21,7 @@ jobs:
 
       - name: Parse Tag
         run: |
-          if echo -n "${{ github.ref }}" | grep -qE "refs/tags/chess-achievements@";then
+          if echo -n "${{ github.ref }}" | grep -qE "refs/tags/treasure-contracts@";then
             echo "PUBLISH=1" >> $GITHUB_ENV
           fi
 
