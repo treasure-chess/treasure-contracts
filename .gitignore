@@ -104,4 +104,6 @@ dist
 .tern-port
 
 
-artefacts/
+artifacts/
+typechain
+cache
