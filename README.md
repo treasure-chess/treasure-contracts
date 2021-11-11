@@ -43,7 +43,7 @@ const tx = await treasureContract.balanceOf("0x...")
 
 👤 **Treasure Chess**
 
-    - GitHub: [@treasure-chess](https://github.com/treasure-chess)
+- GitHub: [@treasure-chess](https://github.com/treasure-chess)
 
 ## Show your support
 
