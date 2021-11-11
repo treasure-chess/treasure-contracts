@@ -39,11 +39,15 @@ const treasureContract = new Contract(
 const tx = await treasureContract.balanceOf("0x...")
 ```
 
-## Author
+## Authors
 
-👤 **Treasure Chess**
+👤 **Joseph Schiarizzi**
 
-- GitHub: [@treasure-chess](https://github.com/treasure-chess)
+- GitHub: [@jschiarizzi](https://github.com/jschiarizzi)
+
+👤 **0xdavinchee**
+
+- GitHub: [@0xdavinchee](https://github.com/0xdavinchee)
 
 ## Show your support
 
