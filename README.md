@@ -36,7 +36,7 @@ const treasureContract = new Contract(
   rpcProvider
 );
 
-const tx = await treasureContract.transfer(//...
+const tx = await treasureContract.balanceOf("0x...")
 ```
 
 ## Author
