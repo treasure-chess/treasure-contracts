@@ -1,6 +1,6 @@
 {
   "name": "@treasure-chess/treasure-contracts",
-  "version": "0.0.5",
+  "version": "0.0.4",
   "description": "Treasure Chess contracts",
   "files": [
     "artifacts/contracts/**/*"
@@ -44,6 +44,9 @@
     "ts-node": "^10.0.0",
     "typechain": "^5.0.0",
     "typescript": "^4.3.2"
+  },
+  "publishConfig": {
+    "access": "public"
   },
   "author": "Treasure Chess Community <maintainers@niftychess.com>",
   "license": "MIT",
