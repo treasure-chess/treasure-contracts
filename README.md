@@ -12,7 +12,7 @@
 
 ## Usage
 
-> Note: The final contracts will be added once they are published. Until then only the ABIs are available here
+> Note: The final contracts will be added once they are published. Until then only the ABIs are available here.
 
 Install the package
 
