@@ -13,6 +13,7 @@ export const deployContracts = async () => {
   const Treasure = await ethers.getContractFactory('Treasure')
   const treasureInstance = await upgrades.deployProxy(Treasure)
   const treasureContract = (await treasureInstance.deployed()) as Treasure
+  console.log("Treasure deployed: ", treasureContract.address);
 
   const TreasureMarket = await ethers.getContractFactory('TreasureMarket')
   const treasureMarketInstance = await upgrades.deployProxy(TreasureMarket, [
@@ -21,6 +22,7 @@ export const deployContracts = async () => {
     process.env.FORWARDER_ADDRESS,
     25,
     100,
+    process.env.DEFUALT_TOKEN
   ])
   const treasureMarketContract =
     (await treasureMarketInstance.deployed()) as TreasureMarket
