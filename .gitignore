@@ -1,3 +1,8 @@
+<<<<<<< HEAD
+typechain
+artifacts
+abi
+=======
 # Logs
 logs
 *.log
@@ -23,57 +28,16 @@ pids
 lib-cov
 
 # Coverage directory used by tools like istanbul
+>>>>>>> 8e17d0849a2507033ac3f7693c6870ac6e69181e
 coverage
-*.lcov
-
-# nyc test coverage
-.nyc_output
-
-# Grunt intermediate storage (https://gruntjs.com/creating-plugins#storing-task-files)
-.grunt
-
-# Bower dependency directory (https://bower.io/)
-bower_components
-
-# node-waf configuration
-.lock-wscript
-
-# Compiled binary addons (https://nodejs.org/api/addons.html)
-build/Release
-
-# Dependency directories
-node_modules/
-jspm_packages/
-
-# TypeScript v1 declaration files
-typings/
-
-# TypeScript cache
-*.tsbuildinfo
-
-# Optional npm cache directory
-.npm
-
-# Optional eslint cache
-.eslintcache
-
-# Microbundle cache
-.rpt2_cache/
-.rts2_cache_cjs/
-.rts2_cache_es/
-.rts2_cache_umd/
-
-# Optional REPL history
-.node_repl_history
-
-# Output of 'npm pack'
-*.tgz
-
-# Yarn Integrity file
-.yarn-integrity
-
-# dotenv environment variables file
+coverage.json
+.openzeppelin/
+cache/
+node_modules
 .env
+<<<<<<< HEAD
+yarn-error.log
+=======
 .env.test
 
 # parcel-bundler cache (https://parceljs.org/)
@@ -111,3 +75,4 @@ dist
 artifacts/
 typechain
 cache
+>>>>>>> 8e17d0849a2507033ac3f7693c6870ac6e69181e
