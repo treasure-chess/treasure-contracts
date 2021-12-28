@@ -5,7 +5,6 @@ cache/
 typechain/*
 
 
-
 =======
 <<<<<<< HEAD
 typechain
@@ -86,3 +85,4 @@ artifacts/
 typechain
 cache
 >>>>>>> 8e17d0849a2507033ac3f7693c6870ac6e69181e
+.env
