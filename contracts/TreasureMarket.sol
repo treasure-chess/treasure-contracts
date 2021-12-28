@@ -211,7 +211,11 @@ contract TreasureMarket is
     require(seller[_id] != address(0), "Something is not quite right here. The seller cant be 0");
 
     IERC20Upgradeable paymentToken = IERC20Upgradeable(_tokenAddress);
+<<<<<<< HEAD
+    require(paymentToken.balanceOf(_msgSender()) >= priceByIdToken[_id], "The buyer does not have a high enough token balance to afford this.");
+=======
     require(paymentToken.balanceOf(_msgSender()) >= priceByIdTokens[_id], "The buyer does not have a high enough token balance to afford this.");
+>>>>>>> origin/dev
 
 
     //Split profits
@@ -219,9 +223,15 @@ contract TreasureMarket is
     uint256 funds = (priceByIdTokens[_id] * (1000 - royaltyPercentagePoint - feePercentagePoint)) / 1000; //send to seller
     uint platformFee = (priceByIdTokens[_id] * feePercentagePoint) / 1000;
 
+<<<<<<< HEAD
+    token.safeTransferFrom(_msgSender(), treasure.getOriginalPlayer(_id), royalty);
+    token.safeTransferFrom(_msgSender(), seller[_id], funds);
+    token.safeTransferFrom(_msgSender(), owner(), platformFee);
+=======
     paymentToken.transferFrom(_msgSender(), treasure.getOriginalPlayer(_id), royalty);
     paymentToken.transferFrom(_msgSender(), seller[_id], funds);
     paymentToken.transferFrom(_msgSender(), owner(), platformFee);
+>>>>>>> origin/dev
 
     //payment made. Move the NFT and emit
     forSaleWithToken[_id] = address(0);

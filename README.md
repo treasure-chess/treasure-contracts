@@ -92,6 +92,10 @@ yarn install
 ## Usage
 
 To run tests, first compile the project with `yarn compile` and then `yarn test`.
+<<<<<<< HEAD
+
+To deploy the contracts, simply call `yarn deploy --network <NETWORK>`. Keep in mind, you must add this network to the `hardhat.config.ts` file with the necessary information for this to work.
+=======
 
 To deploy the contracts, simply call `yarn deploy --network <NETWORK>`. Keep in mind, you must add this network to the `hardhat.config.ts` file with the necessary information for this to work.
 
@@ -114,13 +118,23 @@ function instantBuy( uint \_id ) public // **payable**
 #### Meta transactions
 
 Make meta transaction calls calling the functions normally, and getting end user to sign them normally. The web3 provider that is created knows where the paymaster + [relayer contracts are deployed](https://docs.opengsn.org/contracts/addresses.html#polygon-matic), and actually sends the transaction through the relayer instead of straight to the Treasure or Treasure Market smart contracts.
+>>>>>>> origin/dev
 
 GSN example: https://docs.opengsn.org/javascript-client/getting-started.html#adding-gsn-support-to-existing-app
 
+<<<<<<< HEAD
+To test upgrading the contract, you first need to deploy the `Treasure` and `TreasureMarket` contracts and copy the addresses over to your `.env` file under `TREASURE_ADDRESS` and `TREASURE_MARKET_ADDRESS`.
+The current setup upgrades the contract to `TreasureUpgraded.sol` and `TreasureMarketUpgraded.sol`, but you can modify the `upgradeContracts` function in `scripts/helpers.ts` to upgraded to any contract (change value passed to `getContractFactory`).
+To upgrade the contracts, use `yarn upgrade-contracts --network <NETWORK>`.
+=======
 Example tests of GSN enabled contract: https://github.com/qbzzt/opengsn/blob/master/01_SimpleUse/test/testcontracts.js
+>>>>>>> origin/dev
 
 Example JS in UI for GSN transactions: https://github.com/qbzzt/opengsn/blob/master/01_SimpleUse/ui/etherless.js
 
+<<<<<<< HEAD
+## Contributing
+=======
 Use the deployed relayer and our Paymaster. Check above for relayer addresses for each network.
 
 ```js
@@ -178,6 +192,7 @@ const gsnContractCall = async () => {
     <img alt="License: MIT" src="https://img.shields.io/badge/License-MIT-yellow.svg" />
   </a>
 </p>
+>>>>>>> origin/dev
 
 > Treasure Chess contract library
 
@@ -193,6 +208,8 @@ yarn add @treasure-chess/treasure-contracts
 
 Example usage:
 
+<<<<<<< HEAD
+=======
 ```js
 import treasureArtifact from "@treasure-chess/treasure-contracts/artifacts/contracts/Treasure.sol/Treasure.json";
 import { Contract } from "@ethersproject/contracts";
@@ -218,6 +235,7 @@ const tx = await treasureContract.balanceOf("0x...")
 - GitHub: [@jschiarizzi](https://github.com/jschiarizzi)
 
 <<<<<<< HEAD
+>>>>>>> origin/dev
 - [Hardhat](https://hardhat.org)
 - [Paul R Berg Solidity Template](https://github.com/paulrberg/solidity-template)
 - [0xdavinchee upgraded hardhat template](https://github.com/0xdavinchee)
