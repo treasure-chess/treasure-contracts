@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # @treasure-chess/contracts
 
 <details open="open">
@@ -167,23 +168,56 @@ const gsnContractCall = async () => {
 }   
 ```
 
+=======
+<h1 align="center">Welcome to @treasure-chess/treasure-contracts 👋</h1>
+<p>
+  <a href="https://www.npmjs.com/package/@treasure-chess/treasure-contracts" target="_blank">
+    <img alt="Version" src="https://img.shields.io/npm/v/@treasure-chess/treasure-contracts.svg">
+  </a>
+  <a href="#" target="_blank">
+    <img alt="License: MIT" src="https://img.shields.io/badge/License-MIT-yellow.svg" />
+  </a>
+</p>
 
-## Contributing
+> Treasure Chess contract library
 
-Contributions are what make the open source community such an amazing place to be learn, inspire, and create. Any contributions you make are **greatly appreciated**.
+## Usage
 
-1. Fork the Project
-2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the Branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
+> Note: The final contracts will be added once they are published. Until then only the ABIs are available here.
 
-## License
+Install the package
 
-TODO
+```sh
+yarn add @treasure-chess/treasure-contracts
+```
 
-## Acknowledgements
+Example usage:
 
+```js
+import treasureArtifact from "@treasure-chess/treasure-contracts/artifacts/contracts/Treasure.sol/Treasure.json";
+import { Contract } from "@ethersproject/contracts";
+import { JsonRpcProvider } from "@ethersproject/providers";
+>>>>>>> 8e17d0849a2507033ac3f7693c6870ac6e69181e
+
+const treasureAbi = treasureArtifact.abi;
+const rpcProvider = new JsonRpcProvider(process.env.MATIC_RPC);
+
+const treasureContract = new Contract(
+  "0x...."; // See our docs for the address
+  treasureAbi,
+  rpcProvider
+);
+
+const tx = await treasureContract.balanceOf("0x...")
+```
+
+## Authors
+
+👤 **Joseph Schiarizzi**
+
+- GitHub: [@jschiarizzi](https://github.com/jschiarizzi)
+
+<<<<<<< HEAD
 - [Hardhat](https://hardhat.org)
 - [Paul R Berg Solidity Template](https://github.com/paulrberg/solidity-template)
 - [0xdavinchee upgraded hardhat template](https://github.com/0xdavinchee)
@@ -199,3 +233,16 @@ TODO
 [license-shield]: https://img.shields.io/github/license/jschiarizzi/treasure.svg?style=for-the-badge
 [license-url]: https://github.com/jschiarizzi/treasure/blob/master/LICENSE.txt
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
+=======
+👤 **0xdavinchee**
+
+- GitHub: [@0xdavinchee](https://github.com/0xdavinchee)
+
+## Show your support
+
+Give a ⭐️ if this project helped you!
+
+---
+
+_This README was generated with ❤️ by [readme-md-generator](https://github.com/kefranabg/readme-md-generator)_
+>>>>>>> 8e17d0849a2507033ac3f7693c6870ac6e69181e

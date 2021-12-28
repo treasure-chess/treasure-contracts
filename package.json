@@ -1,9 +1,22 @@
 {
-  "name": "@treasure-chess/contracts",
-  "version": "0.0.3-rc.1",
+  "name": "@treasure-chess/treasure-contracts",
+  "version": "0.0.4",
+  "description": "Treasure Chess contracts",
   "files": [
     "artifacts/contracts/**/*"
   ],
+  "scripts": {
+    "clean": "hardhat clean",
+    "format": "hardhat format",
+    "compile": "hardhat compile",
+    "test": "hardhat test",
+    "deploy": "hardhat run scripts/deploy.ts",
+    "upgrade-contracts": "hardhat run scripts/upgrade.ts"
+  },
+  "dependencies": {
+    "@opengsn/contracts": "^2.2.2",
+    "@openzeppelin/contracts": "^4.3.1"
+  },
   "devDependencies": {
     "@nomiclabs/hardhat-ethers": "^2.0.2",
     "@openzeppelin/contracts-upgradeable": "^4.3.1",
@@ -22,6 +35,7 @@
     "hardhat-deploy": "^0.8.6",
     "hardhat-deploy-ethers": "^0.3.0-beta.10",
     "hardhat-prettier": "^0.0.1",
+    "lerna": "^4.0.0",
     "prettier": "^2.3.1",
     "prettier-plugin-solidity": "^1.0.0-beta.13",
     "solhint": "^3.3.6",
@@ -31,16 +45,13 @@
     "typechain": "^5.0.0",
     "typescript": "^4.3.2"
   },
-  "scripts": {
-    "clean": "hardhat clean",
-    "format": "hardhat format",
-    "compile": "hardhat compile",
-    "test": "hardhat test",
-    "deploy": "hardhat run scripts/deploy.ts",
-	  "upgrade-contracts": "hardhat run scripts/upgrade.ts"
+  "publishConfig": {
+    "access": "public"
   },
-  "dependencies": {
-    "@opengsn/contracts": "^2.2.2",
-    "@openzeppelin/contracts": "^4.3.1"
-  }
+  "author": "Treasure Chess Community <maintainers@niftychess.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/treasure-chess/treasure-contracts/issues"
+  },
+  "homepage": "https://github.com/treasure-chess/treasure-contracts#readme"
 }
