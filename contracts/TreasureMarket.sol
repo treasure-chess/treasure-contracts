@@ -211,11 +211,8 @@ contract TreasureMarket is
     require(seller[_id] != address(0), "Something is not quite right here. The seller cant be 0");
 
     IERC20Upgradeable paymentToken = IERC20Upgradeable(_tokenAddress);
-<<<<<<< HEAD
-    require(paymentToken.balanceOf(_msgSender()) >= priceByIdToken[_id], "The buyer does not have a high enough token balance to afford this.");
-=======
+
     require(paymentToken.balanceOf(_msgSender()) >= priceByIdTokens[_id], "The buyer does not have a high enough token balance to afford this.");
->>>>>>> origin/dev
 
 
     //Split profits
