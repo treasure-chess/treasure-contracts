@@ -154,9 +154,13 @@ contract Treasure is
         string[3] achTexts; //array of the achiement texts
     }
 
-    function getFullGameObject(uint256 _id) public view returns (FullGame) {
-        Game game = games[_id];
-        FullGame fullGame = FullGame(
+    function getFullGameObject(uint256 _id)
+        public
+        view
+        returns (FullGame memory)
+    {
+        Game memory game = games[_id];
+        FullGame memory fullGame = FullGame(
             game.movesHash,
             game.level,
             game.achievement1,
