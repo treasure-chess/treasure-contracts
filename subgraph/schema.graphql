@@ -1,0 +1,52 @@
+# treasure
+
+type Account @entity {
+  "Ethereum Address"
+  id: ID!
+
+  "Games owned by Account"
+  gamesOwned: [Game!] @derivedFrom(field: "owner")
+  numberOfGamesOwned: BigInt!
+}
+
+type Game @entity {
+  id: ID!
+  to: Account # address
+  id: BigInt! # uint256
+  uri: String! # string
+  owner: Account
+  movesHash: Bytes! # bytes32
+}
+
+type OwnershipTransferred @entity {
+  id: ID!
+  previousOwner: Bytes! # address
+  newOwner: Bytes! # address
+}
+
+
+type Transfer @entity {
+  id: ID!
+  from: Bytes! # address
+  to: Bytes! # address
+  tokenId: BigInt! # uint256
+}
+
+
+# treasureMarket
+
+
+type SaleComplete @entity {
+  id: ID!
+  _seller: Bytes! # address
+  _id: BigInt! # uint256
+  _buyer: Bytes! # address
+}
+
+type SaleCompleteWithToken @entity {
+  id: ID!
+  _seller: Bytes! # address
+  _id: BigInt! # uint256
+  _buyer: Bytes! # address
+  _tokenAddress: Bytes! # address
+}

@@ -1,0 +1,54 @@
+specVersion: 0.0.2
+schema:
+  file: ./schema.graphql
+dataSources:
+  - kind: ethereum/contract
+    name: Treasure
+    network: matic
+    source:
+      address: "0x8C7243028492aEeB49c9306355DAa30B5632DE18"
+      abi: Treasure
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.5
+      language: wasm/assemblyscript
+      entities:
+        - GameMinted
+        - OwnershipTransferred
+        - Transfer
+      abis:
+        - name: Treasure
+          file: ./abis/Treasure.json
+      eventHandlers:
+        - event: GameMinted(address,uint256,string,bytes32)
+          handler: handleGameMinted
+        - event: OwnershipTransferred(indexed address,indexed address)
+          handler: handleOwnershipTransferred
+        - event: Transfer(indexed address,indexed address,indexed uint256)
+          handler: handleTransfer
+      file: ./src/mappingTreasure.ts
+  - kind: ethereum/contract
+    name: TreasureMarket
+    network: matic
+    source:
+      address: "0x9Ebf0123d8bA676d29aEFa0A490629546cB6DbB3"
+      abi: TreasureMarket
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.5
+      language: wasm/assemblyscript
+      entities:
+        - OwnershipTransferred
+        - SaleComplete
+        - SaleCompleteWithToken
+      abis:
+        - name: TreasureMarket
+          file: ./abis/TreasureMarket.json
+      eventHandlers:
+        - event: OwnershipTransferred(indexed address,indexed address)
+          handler: handleOwnershipTransferred
+        - event: SaleComplete(address,uint256,address)
+          handler: handleSaleComplete
+        - event: SaleCompleteWithToken(address,uint256,address,address)
+          handler: handleSaleCompleteWithToken
+      file: ./src/mappingTreasureMarket.ts
