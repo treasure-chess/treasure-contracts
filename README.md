@@ -115,8 +115,6 @@ function instantBuy( uint \_id ) public // **payable**
 
 Make meta transaction calls calling the functions normally, and getting end user to sign them normally. The web3 provider that is created knows where the paymaster + [relayer contracts are deployed](https://docs.opengsn.org/contracts/addresses.html#polygon-matic), and actually sends the transaction through the relayer instead of straight to the Treasure or Treasure Market smart contracts.
 
-> > > > > > > origin/dev
-
 GSN example: https://docs.opengsn.org/javascript-client/getting-started.html#adding-gsn-support-to-existing-app
 
 To test upgrading the contract, you first need to deploy the `Treasure` and `TreasureMarket` contracts and copy the addresses over to your `.env` file under `TREASURE_ADDRESS` and `TREASURE_MARKET_ADDRESS`.
@@ -124,8 +122,6 @@ The current setup upgrades the contract to `TreasureUpgraded.sol` and `TreasureM
 To upgrade the contracts, use `yarn upgrade-contracts --network <NETWORK>`.
 
 Example tests of GSN enabled contract: https://github.com/qbzzt/opengsn/blob/master/01_SimpleUse/test/testcontracts.js
-
-> > > > > > > origin/dev
 
 Example JS in UI for GSN transactions: https://github.com/qbzzt/opengsn/blob/master/01_SimpleUse/ui/etherless.js
 
