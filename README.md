@@ -184,9 +184,6 @@ const gsnContractCall = async () => {
     <img alt="License: MIT" src="https://img.shields.io/badge/License-MIT-yellow.svg" />
   </a>
 </p>
->>>>>>> origin/dev
-
-> Treasure Chess contract library
 
 ## Usage
 
