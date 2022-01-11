@@ -40,6 +40,9 @@ contract Treasure is
     mapping(uint256 => address) public originalPlayers;
     mapping(bytes32 => uint256) public movesHashToId;
 
+    // Contract Level Metadata.
+    string public contractMetaData;
+
     //Events
     event GameMinted(address to, uint256 id, string uri, bytes32 movesHash);
     event AdminAdded(address addedBy, address newAdmin);
@@ -151,9 +154,13 @@ contract Treasure is
         string[3] achTexts; //array of the achiement texts
     }
 
-    function getFullGameObject(uint256 _id) public view returns (FullGame) {
-        Game game = games[_id];
-        FullGame fullGame = FullGame(
+    function getFullGameObject(uint256 _id)
+        public
+        view
+        returns (FullGame memory)
+    {
+        Game memory game = games[_id];
+        FullGame memory fullGame = FullGame(
             game.movesHash,
             game.level,
             game.achievement1,

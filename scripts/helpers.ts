@@ -1,5 +1,5 @@
-import { ethers, upgrades } from 'hardhat'
-import { Treasure, TreasureMarket, Treasure__factory } from '../typechain'
+import { ethers, upgrades } from "hardhat";
+import { Treasure, TreasureMarket, Treasure__factory } from "../typechain";
 
 /**
  * Utilize OZ upgrades plugin to deploy, deployProxy does the following:
@@ -10,37 +10,56 @@ import { Treasure, TreasureMarket, Treasure__factory } from '../typechain'
  * @returns { treasureAddress, treasureMarketAddress }
  */
 export const deployContracts = async () => {
-  const Treasure = await ethers.getContractFactory('Treasure')
-  const treasureInstance = await upgrades.deployProxy(Treasure)
-  const treasureContract = (await treasureInstance.deployed()) as Treasure
+  const Treasure = await ethers.getContractFactory("Treasure");
+  const treasureInstance = await upgrades.deployProxy(Treasure);
+  const treasureContract = (await treasureInstance.deployed()) as Treasure;
   console.log("Treasure deployed: ", treasureContract.address);
 
-  const TreasureMarket = await ethers.getContractFactory('TreasureMarket')
+  const TreasureMarket = await ethers.getContractFactory("TreasureMarket");
+  console.log("Treasure Market factory created.");
+
+  /*
+  Market init:
+
+  function initialize(
+      uint256 _gasLessRateLimit,
+      address payable _treasureDeployedAddress,
+      address _forwarder,
+      uint256 _feePercentagePoint,
+      uint256 _royaltyPercentagePoint,
+      address _defaultTokenAddress
+  */
+
+  console.log("forwarder: " + process.env.FORWARDER_ADDRESS);
+
   const treasureMarketInstance = await upgrades.deployProxy(TreasureMarket, [
     0,
     treasureContract.address,
     process.env.FORWARDER_ADDRESS,
     25,
-    100,
-    process.env.DEFUALT_TOKEN
-  ])
+    75,
+    process.env.DEFAULT_TOKEN,
+  ]);
+
+  console.log("market proxy instance created");
+
   const treasureMarketContract =
-    (await treasureMarketInstance.deployed()) as TreasureMarket
+    (await treasureMarketInstance.deployed()) as TreasureMarket;
 
   console.log(
-    'Treasure Contract Address (used for upgrades): ',
+    "Treasure Contract Address (used for upgrades): ",
     treasureContract.address
-  )
+  );
   console.log(
-    'Treasure Market Contract Address (used for upgrades): ',
+    "Treasure Market Contract Address (used for upgrades): ",
     treasureMarketContract.address
-  )
+  );
 
   return {
     treasureContract,
     treasureMarketContract,
-  }
-}
+  };
+};
 
 /**
  * Utilize OZ upgrades plugin to upgrade, upgradeProxy does the following:
@@ -53,14 +72,14 @@ export const upgradeContracts = async (
   treasureAddress: string,
   treasureMarketAddress: string
 ) => {
-  const Treasure = await ethers.getContractFactory('TreasureUpgraded')
-  console.log('Upgrading Treasure...')
-  await upgrades.upgradeProxy(treasureAddress, Treasure)
-  console.log('Treasure upgraded.')
+  const Treasure = await ethers.getContractFactory("TreasureUpgraded");
+  console.log("Upgrading Treasure...");
+  await upgrades.upgradeProxy(treasureAddress, Treasure);
+  console.log("Treasure upgraded.");
 
   const TreasureMarket = await ethers.getContractFactory(
-    'TreasureMarketUpgraded'
-  )
-  await upgrades.upgradeProxy(treasureMarketAddress, TreasureMarket)
-  console.log('TreasureMarket upgraded.')
-}
+    "TreasureMarketUpgraded"
+  );
+  await upgrades.upgradeProxy(treasureMarketAddress, TreasureMarket);
+  console.log("TreasureMarket upgraded.");
+};
