@@ -2,7 +2,7 @@ name: Publish PR Packages
 
 on:
   workflow_run:
-    workflows: ['Create PR Artifact']
+    workflows: ["Create PR Artifact"]
     types:
       - completed
 
@@ -65,7 +65,7 @@ jobs:
         id: fc
         with:
           issue-number: ${{ steps.pr.outputs.pr_number }}
-          comment-author: 'github-actions[bot]'
+          comment-author: "github-actions[bot]"
 
       - name: Create comment
         if: ${{ steps.pr.outputs.n_packages > 0 && steps.fc.outputs.comment-id == 0 }}
@@ -78,7 +78,7 @@ jobs:
             Install this PR (you need to setup Github packages):
               
             ```bash
-            yarn add @treasure-chess/treasure-contracts@PR${{ steps.pr.outputs.pr_number }}
+            yarn add @treasure-chess/treasure-contracts@PR${{ steps.pr.outputs.pr_number }} --registry https://npm.pkg.github.com
             ```
 
             <details><summary>:octocat: Click to learn how to use Github packages</summary>
@@ -88,7 +88,6 @@ jobs:
             Next add these lines to your `.npmrc` file, replacing TOKEN with your personal access token. See [Installing a package from Github](https://docs.github.com/en/packages/guides/configuring-npm-for-use-with-github-packages#installing-a-package) if you get stuck.
 
             ```
-            @treasure-chess:registry=https://npm.pkg.github.com
             //npm.pkg.github.com/:_authToken=TOKEN
             ```
 
