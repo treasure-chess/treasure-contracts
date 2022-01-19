@@ -18,6 +18,13 @@ export const deployContracts = async () => {
   const TreasureMarket = await ethers.getContractFactory("TreasureMarket");
   console.log("Treasure Market factory created.");
 
+  const adminAddResult = await treasureContract.addAdmin(
+    `${process.env.ADMIN_PUBLIC_ADDRESS}`
+  );
+  console.log(
+    "added treasure admin " + `${process.env.ADMIN_PUBLIC_ADDRESS}`
+  );
+
   /*
   Market init:
 
@@ -30,7 +37,7 @@ export const deployContracts = async () => {
       address _defaultTokenAddress
   */
 
-  console.log("forwarder: " + process.env.FORWARDER_ADDRESS);
+  //console.log("forwarder: " + process.env.FORWARDER_ADDRESS);
 
   const treasureMarketInstance = await upgrades.deployProxy(TreasureMarket, [
     0,
@@ -46,12 +53,9 @@ export const deployContracts = async () => {
   const treasureMarketContract =
     (await treasureMarketInstance.deployed()) as TreasureMarket;
 
+  console.log("Treasure Contract Address: ", treasureContract.address);
   console.log(
-    "Treasure Contract Address (used for upgrades): ",
-    treasureContract.address
-  );
-  console.log(
-    "Treasure Market Contract Address (used for upgrades): ",
+    "Treasure Market Contract Address: ",
     treasureMarketContract.address
   );
 
