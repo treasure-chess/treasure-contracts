@@ -19,10 +19,10 @@ export const deployContracts = async () => {
   console.log("Treasure Market factory created.");
 
   const adminAddResult = await treasureContract.addAdmin(
-    "0xcb81a76a565ac4870eda5b0e32c5a0d2ec734174"
+    `${process.env.ADMIN_PUBLIC_ADDRESS}`
   );
   console.log(
-    "added treasure admin: 0xcb81a76a565ac4870eda5b0e32c5a0d2ec734174"
+    "added treasure admin " + `${process.env.ADMIN_PUBLIC_ADDRESS}`
   );
 
   /*
