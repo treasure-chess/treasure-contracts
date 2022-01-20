@@ -56,6 +56,18 @@ const config: HardhatUserConfig = {
       url: `https://polygon-mainnet.infura.io/v3/${process.env.INFURA_API_KEY}`,
       accounts: [`0x${process.env.PRIVATE_KEY}`],
       gasPrice: 8000000000,
+    },
+    rinkeby:{
+      url: `https://rinkeby.infura.io/v3/${process.env.INFURA_API_KEY}`,
+      accounts: [`0x${process.env.PRIVATE_KEY}`],
+    },
+    goerli:{
+      url: `https://goerli.infura.io/v3/${process.env.INFURA_API_KEY}`,
+      accounts: [`0x${process.env.PRIVATE_KEY}`],
+    },
+    arbitrum:{
+      url: `https://arbitrum-mainnet.infura.io/v3/${process.env.INFURA_API_KEY}`,
+      accounts: [`0x${process.env.PRIVATE_KEY}`],
     }
   },
 }
