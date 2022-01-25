@@ -42,17 +42,17 @@ contract TreasureMarket is
     Treasure treasure;
 
     //events
-    event StartSale(address _seller, uint256 _id, uint256 _price);
-    event CancelSale(address _seller, uint256 _id);
+    event ListItem(address _seller, uint256 _id, uint256 _price);
+    event UnlistItem(address _seller, uint256 _id);
     event SaleComplete(address _seller, uint256 _id, address _buyer);
 
-    event StartSaleWithToken(
+    event ListItemWithToken(
         address _seller,
         uint256 _id,
         uint256 _price,
         address _tokenAddress
     );
-    event CancelSaleWithToken(address _seller, uint256 _id);
+    event UnlistItemWithToken(address _seller, uint256 _id);
     event SaleCompleteWithToken(
         address _seller,
         uint256 _id,
@@ -153,7 +153,7 @@ contract TreasureMarket is
         seller[_id] = _msgSender();
 
         treasure.safeTransferFrom(_msgSender(), address(this), _id);
-        emit StartSale(seller[_id], _id, _price);
+        emit ListItem(seller[_id], _id, _price);
     }
 
     function unlistItem(uint256 _id) public {
@@ -165,7 +165,7 @@ contract TreasureMarket is
         seller[_id] = address(0);
 
         treasure.safeTransferFrom(address(this), _msgSender(), _id);
-        emit CancelSale(_msgSender(), _id);
+        emit UnlistItem(_msgSender(), _id);
     }
 
     //signature validation can be checked in SignatureChecker.sol
@@ -181,7 +181,7 @@ contract TreasureMarket is
 
         address originalPlayer = treasure.getOriginalPlayer(_id);
         (bool sentRoyalty, ) = originalPlayer.call{value: royalty}("");
-        require(sentRoyalty, "Failed to send royalty. Transaction fails. : ");
+        require(sentRoyalty, "Failed to send royalty. Transaction fails.");
 
         uint256 funds = (msg.value *
             (1000 - royaltyPercentagePoint - feePercentagePoint)) / 1000;
@@ -197,7 +197,7 @@ contract TreasureMarket is
         emit SaleComplete(seller[_id], _id, _msgSender());
     }
 
-    //======== Marketplace Sales With Approved Tokens - defualt should be USDC ========//
+    //======== Marketplace Sales With Approved Tokens - default should be USDC ========//
 
     function tokenListItem(
         uint256 _id,
@@ -223,7 +223,7 @@ contract TreasureMarket is
         seller[_id] = _msgSender();
 
         treasure.safeTransferFrom(_msgSender(), address(this), _id);
-        emit StartSaleWithToken(seller[_id], _id, _price, _tokenAddress);
+        emit ListItemWithToken(seller[_id], _id, _price, _tokenAddress);
     }
 
     function tokenUnlistItem(uint256 _id) public {
@@ -234,7 +234,7 @@ contract TreasureMarket is
         forSaleWithToken[_id] = address(0);
         seller[_id] = address(0);
 
-        emit CancelSaleWithToken(_msgSender(), _id);
+        emit UnlistItemWithToken(_msgSender(), _id);
     }
 
     //@dev - moving tokens to the contract is the same gas as moving them to the platform owner, so just do that.
@@ -250,7 +250,7 @@ contract TreasureMarket is
 
         require(
             paymentToken.balanceOf(_msgSender()) >= priceByIdTokens[_id],
-            "The buyer does not have a high enough token balance to afford this."
+            "The buyer token balance is too small."
         );
 
         //Split profits
