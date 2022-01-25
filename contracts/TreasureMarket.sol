@@ -156,7 +156,7 @@ contract TreasureMarket is
         emit StartSale(seller[_id], _id, _price);
     }
 
-    function cancelSale(uint256 _id) public {
+    function unlistItem(uint256 _id) public {
         require(seller[_id] == _msgSender());
         require(isForSaleById[_id] == true);
 
@@ -199,7 +199,7 @@ contract TreasureMarket is
 
     //======== Marketplace Sales With Approved Tokens - defualt should be USDC ========//
 
-    function tokenListIten(
+    function tokenListItem(
         uint256 _id,
         uint256 _price,
         address _tokenAddress
@@ -226,7 +226,7 @@ contract TreasureMarket is
         emit StartSaleWithToken(seller[_id], _id, _price, _tokenAddress);
     }
 
-    function tokenCancelSale(uint256 _id) public {
+    function tokenUnlistItem(uint256 _id) public {
         require(seller[_id] == _msgSender());
         require(forSaleWithToken[_id] != address(0));
 
