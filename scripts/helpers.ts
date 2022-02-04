@@ -13,17 +13,15 @@ export const deployContracts = async () => {
   const Treasure = await ethers.getContractFactory("Treasure");
   const treasureInstance = await upgrades.deployProxy(Treasure);
   const treasureContract = (await treasureInstance.deployed()) as Treasure;
-  console.log("Treasure deployed: ", treasureContract.address);
+  //console.log("Treasure deployed: ", treasureContract.address);
 
   const TreasureMarket = await ethers.getContractFactory("TreasureMarket");
-  console.log("Treasure Market factory created.");
+  //console.log("Treasure Market factory created.");
 
   const adminAddResult = await treasureContract.addAdmin(
     `${process.env.ADMIN_PUBLIC_ADDRESS}`
   );
-  console.log(
-    "added treasure admin " + `${process.env.ADMIN_PUBLIC_ADDRESS}`
-  );
+  console.log("added treasure admin " + `${process.env.ADMIN_PUBLIC_ADDRESS}`);
 
   /*
   Market init:
@@ -48,7 +46,7 @@ export const deployContracts = async () => {
     process.env.DEFAULT_TOKEN,
   ]);
 
-  console.log("market proxy instance created");
+  //console.log("market proxy instance created");
 
   const treasureMarketContract =
     (await treasureMarketInstance.deployed()) as TreasureMarket;
