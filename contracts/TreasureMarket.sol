@@ -234,7 +234,7 @@ contract TreasureMarket is
         forSaleWithToken[_id] = address(0);
         seller[_id] = address(0);
 
-        treasure.safeTransferFrom(_msgSender(), address(this), _id);
+        treasure.safeTransferFrom(address(this), _msgSender(), _id);
 
         emit UnlistItemWithToken(_msgSender(), _id);
     }
