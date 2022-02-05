@@ -152,7 +152,7 @@ contract TreasureMarket is
         priceById[_id] = _price;
         seller[_id] = _msgSender();
 
-        treasure.safeTransferFrom(_msgSender(), address(this), _id);
+        treasure.transferFrom(_msgSender(), address(this), _id);
         emit ListItem(seller[_id], _id, _price);
     }
 
@@ -222,7 +222,7 @@ contract TreasureMarket is
         forSaleWithToken[_id] = _tokenAddress; //normally is true/false, but with token lets just store the address here
         seller[_id] = _msgSender();
 
-        treasure.safeTransferFrom(_msgSender(), address(this), _id);
+        treasure.transferFrom(_msgSender(), address(this), _id);
         emit ListItemWithToken(seller[_id], _id, _price, _tokenAddress);
     }
 
