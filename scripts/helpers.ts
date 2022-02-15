@@ -57,6 +57,10 @@ export const deployContracts = async () => {
     treasureMarketContract.address
   );
 
+  const daoOwnerSetResult = await treasureMarketContract.transferOwnership(
+    `${process.env.DAO_ADDRESS}`
+  );
+
   return {
     treasureContract,
     treasureMarketContract,
