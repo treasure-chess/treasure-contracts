@@ -39,19 +39,6 @@ const treasureContract = new Contract(
 const tx = await treasureContract.balanceOf("0x...")
 ```
 
-## About The Project
-
-A simple hardhat template created from `npx hardhat init`.
-
-This project includes:
-
-- `hardhat-prettier`: a plugin that makes it easy to format solidity files based on rules set in `.prettierrc`.
-  - `npx hardhat format`
-- [hardhat-typechain](https://hardhat.org/plugins/hardhat-typechain.html): a plugin that generates typings files for use in test files and possibly even on the front-end.
-- [solidity-coverage](https://hardhat.org/plugins/solidity-coverage.html): a plugin that generates a coverage report on how much of your code has been tested.
-  - `npx hardhat coverage`
-- `@openzeppelin/hardhat-upgrades`: a plugin which is used in conjunction with hardhat to deploy upgradeable contracts and upgrade them later. The plugin by default prevents you from deploying/upgrading "dangerous" upgradeable contracts.
-
 ## Getting Started
 
 To get a local copy up and running follow these simple steps.
@@ -71,6 +58,14 @@ You also need a `.env` file with the following items:
 To run tests, first compile the project with `yarn compile` and then `yarn test`.
 
 To deploy the contracts, simply call `yarn deploy --network <NETWORK>`. Keep in mind, you must add this network to the `hardhat.config.ts` file with the necessary information for this to work.
+
+## Contract verification
+
+We adhere to [EIP 1822](https://eips.ethereum.org/EIPS/eip-1822) and [EIP 1967](https://eips.ethereum.org/EIPS/eip-1967) implementations using Open Zeppelin. In order to find the address of the logic contract, you can follow these steps:
+
+1. Navigate to https://etherflow.quiknode.io/ (thanks to Quicknode for providing this powerful tool!) and enter your RPC, eg. https://rpc-mainnet.matic.network
+2. Select the `ethers` library and the call `eth_getStorageAt`
+3. Enter the address for the proxy contract (this is the one you interact with), and a storage slot of `0x360894a13ba1a3210667c828492db98dca3e2076cc3735a920a3ca505d382bbc`. The result should be the address for the logic contract.
 
 ### Public user functions
 
