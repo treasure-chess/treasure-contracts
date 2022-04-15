@@ -16,7 +16,7 @@
 
 **Almost all of the code & tooling for Treasure Chess has been open sourced**. We hope you find these resources useful. Happy hacking!
 
-- App tooling using RedwoodJs 👉 https://github.com/pi0neerpat/redwood-devops-example
+- App tooling using RedwoodJs https://github.com/pi0neerpat/redwood-devops-example
 - Code specific to Treasure Chess (smart contracts, achievements, card generation, etc.) is on our organization page: https://github.com/treasure-chess
 
 ## Usage
