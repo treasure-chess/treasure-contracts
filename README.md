@@ -72,6 +72,20 @@ To deploy the contracts, simply call `yarn deploy --network <NETWORK>`. Keep in 
 
 We adhere to [EIP 1822](https://eips.ethereum.org/EIPS/eip-1822) and [EIP 1967](https://eips.ethereum.org/EIPS/eip-1967) implementations using Open Zeppelin. In order to find the address of the logic contract, you can follow these steps:
 
+After deploying, not the logic contract addresses for Treasure and TreasureMarket. Use this CLI command to verify on etherscan.
+
+```bash
+npx hardhat verify --network [network] [contract address]
+```
+
+Another note: even if your contract has some params in the constructor, do not add them to the verification command, because the proxy has handled them.
+
+### Manually check the implementation contract
+
+The logic contracts addresses will be printed out during deployment via `upgrades.erc1967.getImplementationAddress`.
+
+If you want to manually check that these are right try this tool:
+
 1. Navigate to https://etherflow.quiknode.io/ (thanks to Quicknode for providing this powerful tool!) and enter your RPC, eg. https://rpc-mainnet.matic.network
 2. Select the `ethers` library and the call `eth_getStorageAt`
 3. Enter the address for the proxy contract (this is the one you interact with), and a storage slot of `0x360894a13ba1a3210667c828492db98dca3e2076cc3735a920a3ca505d382bbc`. The result should be the address for the logic contract.
