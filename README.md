@@ -80,6 +80,11 @@ npx hardhat verify --network [network] [contract address]
 
 Another note: even if your contract has some params in the constructor, do not add them to the verification command, because the proxy has handled them.
 
+### Debugging Verification:
+
+The best place for help on this is Hardhat discord + OZ forum.
+Try deleting the cache and artifacts folders, and compiling again.
+
 ### Manually check the implementation contract
 
 The logic contracts addresses will be printed out during deployment via `upgrades.erc1967.getImplementationAddress`.
