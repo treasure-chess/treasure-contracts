@@ -15,3 +15,5 @@ node_modules
 typechain
 cache
 .env
+
+yarn.lock

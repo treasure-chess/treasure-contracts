@@ -61,6 +61,15 @@ export const deployContracts = async () => {
     `${process.env.DAO_ADDRESS}`
   );
 
+  const implementationAddress = await upgrades.erc1967.getImplementationAddress(
+    treasureContract.address
+  );
+  const logicMarketAddress = await upgrades.erc1967.getImplementationAddress(
+    treasureMarketContract.address
+  );
+  console.log("Treasure Logic Contract = ", implementationAddress);
+  console.log("Market Logic Contract = ", logicMarketAddress);
+
   return {
     treasureContract,
     treasureMarketContract,
